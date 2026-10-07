@@ -120,7 +120,7 @@ module "ec2_instances" {
   }
 }
 
-module "s3-bucket-jw" {
+module "terraform-aws-s3-bucket-jw" {
   source  = "app.terraform.io/policy-as-code-training/s3-bucket-jw/aws"
   version = "1.1.1"
   bucket_name = "jw-bucket-107"
