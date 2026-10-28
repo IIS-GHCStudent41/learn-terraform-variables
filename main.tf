@@ -30,7 +30,7 @@ module "vpc" {
   enable_vpn_gateway = false
 
   tags = {
-    project     = "project-alpha",
+    project     = "project-bobby-world",
     environment = "development"
   }
 }
@@ -39,14 +39,14 @@ module "app_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
 
-  name        = "web-sg-project-alpha-dev"
+  name        = "web-sg-project-bobby-world-dev"
   description = "Security group for web-servers with HTTP ports open within VPC"
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
 
   tags = {
-    project     = "project-alpha",
+    project     = "project-bobby-world",
     environment = "development"
   }
 }
@@ -55,14 +55,14 @@ module "lb_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
 
-  name        = "lb-sg-project-alpha-dev"
+  name        = "lb-sg-project-bobby-world-dev"
   description = "Security group for load balancer with HTTP ports open within VPC"
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
   tags = {
-    project     = "project-alpha",
+    project     = "project-bobby-world",
     environment = "development"
   }
 }
@@ -77,7 +77,7 @@ module "elb_http" {
   version = "2.4.0"
 
   # Ensure load balancer name is unique
-  name = "lb-${random_string.lb_id.result}-project-alpha-dev"
+  name = "lb-${random_string.lb_id.result}-project-bobby-world-dev"
 
   internal = false
 
@@ -103,7 +103,7 @@ module "elb_http" {
   }
 
   tags = {
-    project     = "project-alpha",
+    project     = "project-bobby-world",
     environment = "development"
   }
 }
@@ -117,7 +117,7 @@ module "ec2_instances" {
   security_group_ids = [module.app_security_group.this_security_group_id]
 
   tags = {
-    project     = "project-alpha",
+    project     = "project-bobby-world",
     environment = "development"
   }
 }
